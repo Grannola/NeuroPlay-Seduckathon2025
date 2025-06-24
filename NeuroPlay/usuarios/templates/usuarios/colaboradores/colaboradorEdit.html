@@ -1,0 +1,77 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content_main %}
+<div class="page-header">
+    <div class="page-block">
+            <div class="row align-items-center">
+              <div class="col-md-12">
+                <ul class="breadcrumb">
+                  {% comment %} <li class="breadcrumb-item"><a href="">Usuários</a></li> {% endcomment %}
+                  <li class="breadcrumb-item" aria-current="page"> Usuários </li>
+                  <li class="breadcrumb-item" aria-current="page"> Colaborador </li>
+                  <li class="breadcrumb-item" aria-current="page"> Visualizar </li>
+                </ul>
+              </div>
+              <div class="col-md-12 mt-2">
+                <div class="page-header-title">
+                  <h2 class="mb-0"> Visualizar Colaborador </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Editar Colaborador</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{% url 'usuarios:colaborador_edit' colaborador.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label" for="nome">Nome Completo</label>
+                                <input type="text" class="form-control" id="nome" name="nome" value="{{ colaborador.nome }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="email">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ colaborador.email }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label" for="cpf">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" value="{{ colaborador.cpf }}">
+                            </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="foto">Foto</label>
+                                <input type="file" class="form-control" id="foto" name="foto">
+                                {% if colaborador.foto %}
+                                    <img src="{{ colaborador.foto.url }}" alt="Foto atual" class="img-thumbnail mt-2" width="100">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-3">
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        <a href="{% url 'usuarios:colaboradores_all' %}" class="btn btn-secondary">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_main %}

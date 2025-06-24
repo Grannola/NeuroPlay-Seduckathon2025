@@ -1,0 +1,90 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    overflow: hidden;
+}
+
+.game_div{
+    display: block;
+    border: 5px solid black;
+    background-image: url(./img/fundo.png);
+    background-size: cover;
+    background-position: 0%;
+    background-repeat: repeat;
+    position: relative;
+    overflow: hidden;
+    animation: fundo-animation 5s linear 0s infinite paused;
+}
+
+@keyframes fundo-animation{
+    0%{
+        background-position: -100%;
+    }
+    100%{
+        background-position: 370%;
+    }
+}
+
+.nyan{
+    width: 120px;
+    position: absolute;
+    top: 10px;
+    opacity: 0.3;
+    display: inline-block;
+}
+
+#personagem{
+    width: 120px;
+    position: absolute;
+    bottom: 150px;
+    display: inline-block;
+    z-index: 999;
+}
+
+.jump{
+    animation: jump 0.5s ease-in-out;
+    /*Eu pressiono a tecla por 0.5s então a animação de pulo é executada inteira
+    porém, se eu mudar a duração da animação para 1s  somente metade da animação é feita*/
+}
+
+@keyframes jump{
+    0% {
+        bottom: 200px;
+    }
+    40%{
+        bottom: 350px;
+    }
+    50%{
+        bottom: 350px;
+    }
+    60%{
+        bottom: 350px;
+    }
+    100% {
+        bottom: 200px;
+    }
+}
+
+/* Coisas do obstáculo */
+#obstaculo{
+    background-color: blue;
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    position: absolute;
+    bottom: 160px;
+    animation: obstaculo 2s linear infinite;
+    z-index: 1;
+}
+
+@keyframes obstaculo{
+    from{
+        right: -60px;
+    }
+    to{
+        right: 100%;
+    }
+}

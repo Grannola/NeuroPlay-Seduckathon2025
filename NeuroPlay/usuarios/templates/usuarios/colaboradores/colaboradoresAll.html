@@ -1,0 +1,99 @@
+
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content_main %}
+    <div class="page-header">
+          <div class="page-block">
+            <div class="row align-items-center">
+              <div class="col-md-12">
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="">Usuários</a></li>
+                  <li class="breadcrumb-item" aria-current="page">Colaboradores</li>
+                </ul>
+              </div>
+              <div class="col-md-12 mt-2">
+                <div class="page-header-title">
+                  <h2 class="mb-0"> Colaboradores </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <div class="col-md-4 col-sm-6">
+            <a href="{% url "usuarios:colaborador_add" %}" class="btn btn-primary mb-3"> Adicionar Colaborador </a>
+          </div>      
+        </row>
+
+        <div class="row">
+          <div class="col-md-6 col-xl-12">
+            <div class="card table-card">
+              <div class="card-header d-flex align-items-center justify-content-between py-3">
+                <h5> Alunos </h5> 
+              </div>
+              <div class="card-body py-2 px-0">
+                <div class="table-responsive">
+
+                  <table class="table table-hover " id="pc-dt-simple">
+                  <thead>
+                    <tr>
+                      <th class="col-4"> Colaborador </th>
+                      <th class="col-4"> E-mail </th>
+                      <th class="col-2"> CPF </th>
+                      <th class="text-center col-2"> Ações </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if not colaboradores %}
+                      <tr>
+                          <td colspan="4"> Não existem colaboradores cadastrados </td>
+                      </tr>
+                    {% else %}
+                        
+                          {% for colaborador in colaboradores %}
+                              <tr>
+                                  <td>
+                                    <div class="d-inline-block align-middle">
+                                      <img src="
+                                          {% if colaborador.foto %}
+                                              {{colaborador.foto.url}}
+                                          {% else %}
+                                              {% static "assets/foto_perfil_padrao.png" %}
+                                          {% endif %}
+                                          
+                                      " alt="foto perfil" class="img-radius align-top m-r-15" style="width:40px;">
+                                      <div class="d-inline-block align-middle">
+                                        <h6 class="m-b-0 pt-2"> {{colaborador.nome}} </h6>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td> {{colaborador.email}} </td>
+                                  <td> {{colaborador.cpf}} </td>
+                                  <td class="text-center" >
+                                    <div class="overlay-edit">
+                                      <ul class="list-inline mb-0">
+                                        <li class="list-inline-item m-0">
+                                            {% comment %} <a href="{% url 'usuarios:colaborador_edit' colaborador.id %}" class="btn btn-secondary"> Visualizar </a> {% endcomment %}
+
+                                            <a href="{% url 'usuarios:colaborador_edit' colaborador.id %} " class="btn btn-secondary"> Visualizar </a>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </td>
+                              </tr>
+                          {% endfor %}
+                    {% endif %}                  
+                  </tbody>
+                </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+{% endblock content_main %}
+

@@ -1,0 +1,108 @@
+
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content_main %}
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href=""> Jogos </a></li>
+                        <li class="breadcrumb-item" aria-current="page"> Acervo </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-12 mt-2">
+                    <div class="page-header-title">
+                        <h2 class="mb-0"> Jogo da Memória </h2>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-12">
+                
+
+
+
+                
+
+
+
+
+
+            </div>      
+        </row>       
+    </div>
+
+        
+{% endblock content_main %}
+
+
+
+
+{% block formatacoes_estilo %}
+<style>
+  #preview-container {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-top: 8px;
+  }
+
+  #preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const fotoInput = document.getElementById("foto");
+    const previewImg = document.getElementById("preview-img");
+
+    fotoInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        previewImg.style.display = "block";
+
+        reader.addEventListener("load", function () {
+          previewImg.setAttribute("src", this.result);
+        });
+
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cpfInput = document.getElementById("cpf_responsavel");
+
+    cpfInput.addEventListener("input", function () {
+      let value = cpfInput.value.replace(/\D/g, ""); // Remove tudo que não for número
+
+      if (value.length > 11) value = value.slice(0, 11);
+
+      value = value.replace(/(\d{3})(\d)/, "$1.$2");
+      value = value.replace(/(\d{3})(\d)/, "$1.$2");
+      value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+      cpfInput.value = value;
+    });
+  });
+</script>
+
+{% endblock formatacoes_estilo %}
+

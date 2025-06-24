@@ -1,0 +1,48 @@
+
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content_main %}
+    <div class="page-header">
+        <div class="page-block">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Jogos</a></li>
+                    <li class="breadcrumb-item" aria-current="page">Acervo</li>
+                    </ul>
+                </div>
+                <div class="col-md-12 mt-2">
+                    <div class="page-header-title">
+                    <h2 class="mb-0"> Acervo de Jogos </h2>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+
+
+        <div class="row">
+            {% for jogo in jogos %}
+                <div class="col-md-3 col-xxl-3">
+                    <div class="pc-component">
+                        <div class="card mb-3">
+                            <img class="img-fluid card-img-top" src="{{ jogo.imagem.url }}" alt="Imagem do jogo">
+                            <div class="card-body">
+                                <h4 class="card-text">{{ jogo.nome }}</h4>
+                                <p class="card-text">{{ jogo.descricao }}</p>
+                                <button class="btn btn-primary">Abrir Jogo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+
+
+        
+{% endblock content_main %}

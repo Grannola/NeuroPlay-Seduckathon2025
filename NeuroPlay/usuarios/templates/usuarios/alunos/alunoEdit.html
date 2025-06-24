@@ -1,0 +1,92 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content_main %}
+<div class="page-header">
+    <div class="page-block">
+            <div class="row align-items-center">
+              <div class="col-md-12">
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="">Usuários</a></li>
+                  <li class="breadcrumb-item" aria-current="page">Alunos</li>
+                  <li class="breadcrumb-item" aria-current="page">Visualizar Aluno</li>
+                </ul>
+              </div>
+              <div class="col-md-12 mt-2">
+                <div class="page-header-title">
+                  <h2 class="mb-0"> Visualizar Aluno </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Editar Aluno</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{% url 'usuarios:aluno_edit' aluno.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label" for="nome">Nome Completo</label>
+                                <input type="text" class="form-control" id="nome" name="nome" value="{{ aluno.nome }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="data_nasc">Data Nascimento</label>
+                                <input type="date" class="form-control" id="data_nasc" name="data_nasc" value="{{ aluno.data_nasc|date:'Y-m-d' }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label" for="observacoes">Observações</label>
+                                <input type="text" class="form-control" id="observacoes" name="observacoes" value="{{ aluno.observacoes }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="foto">Foto</label>
+                                <input type="file" class="form-control" id="foto" name="foto">
+                                {% if aluno.foto %}
+                                    <img src="{{ aluno.foto.url }}" alt="Foto atual" class="img-thumbnail mt-2" width="100">
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label class="form-label" for="responsavel">Responsável</label>
+                                <input type="text" class="form-control" id="responsavel" name="responsavel" value="{{ aluno.responsavel }}">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label" for="cpf_responsavel">CPF do Responsável</label>
+                                <input type="text" class="form-control" id="cpf_responsavel" name="cpf_responsavel" value="{{ aluno.cpf_responsavel }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-3">
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        <a href="{% url 'usuarios:alunos_all' %}" class="btn btn-secondary">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_main %}

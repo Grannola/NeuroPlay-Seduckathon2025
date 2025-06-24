@@ -1,0 +1,111 @@
+
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content_main %}
+    <div class="page-header">
+          <div class="page-block">
+            <div class="row align-items-center">
+              <div class="col-md-12">
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                  <li class="breadcrumb-item" aria-current="page">Home</li>
+                </ul>
+              </div>
+              <div class="col-md-12 mt-2">
+                <div class="page-header-title">
+                  <h2 class="mb-0"> Dashboard </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+          <div class="col-md-4 col-sm-6">
+            <div class="card statistics-card-1 overflow-hidden ">
+              <div class="card-body">
+                <img src="{% static "assets/images/widget/img-status-4.svg" %}" alt="img" class="img-fluid img-bg" >
+                <h5 class="mb-4"> Alunos Cadastrados </h5>
+                <div class="d-flex align-items-center mt-3">
+                  <h2 class="f-w-300 d-flex align-items-center m-b-0"> {{quant_alunos}} </h2>
+                </div>
+                <p class="text-muted mb-2 text-sm mt-3"> Alunos com status ativo </p>
+              </div>
+            </div>
+          </div>        
+        </row>
+
+        <div class="row">
+          <div class="col-md-6 col-xl-12">
+            <div class="card table-card">
+              <div class="card-header d-flex align-items-center justify-content-between py-3">
+                <h5> Alunos Recentes </h5> 
+              </div>
+              <div class="card-body py-2 px-0">
+                <div class="table-responsive">
+
+                  <table class="table table-hover " id="pc-dt-simple">
+                  <thead>
+                    <tr>
+                      <th class="col-4"> Aluno </th>
+                      <th class="col-4"> Responsável </th>
+                      <th class="col-2"> Data Nasc. </th>
+                      <th class="text-center col-2"> Ações </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if not alunos %}
+                      <tr>
+                          <td colspan="4"> Não existem alunos cadastrados </td>
+                      </tr>
+                    {% else %}
+                        
+                          {% for aluno in alunos %}
+                              <tr>
+                                  <td>
+                                    <div class="d-inline-block align-middle">
+                                      <img src="
+                                          {% if aluno.foto %}
+                                              {{aluno.foto.url}}
+                                          {% else %}
+                                              {% static "assets/foto_perfil_padrao.png" %}
+                                          {% endif %}
+                                          
+                                      " alt="foto perfil" class="img-radius align-top m-r-15" style="width:40px;">
+                                      <div class="d-inline-block align-middle">
+                                        <h6 class="m-b-0 pt-2"> {{aluno.nome}} </h6>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td> {{aluno.responsavel}} </td>
+                                  <td> {{aluno.data_nasc}} </td>
+                                  <td class="text-center" >
+                                    <div class="overlay-edit">
+                                      <ul class="list-inline mb-0">
+                                        <li class="list-inline-item m-0"><a href="#" class="btn btn-secondary"> Visualizar </a></li>
+                                      </ul>
+                                    </div>
+                                  </td>
+                              </tr>
+                          {% endfor %}
+                  
+                    {% endif %}
+
+                    
+                  </tbody>
+                </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        
+{% endblock content_main %}
